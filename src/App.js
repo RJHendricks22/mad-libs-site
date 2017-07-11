@@ -55,6 +55,7 @@ class App extends Component {
           <br/><br/>
           <h3>Copy and Paste the mad lib</h3>
           <textarea name="madlibinput" onChange={this.madLibChange}></textarea>
+          <button onClick={this.renderMadLib}>Render!</button>
           <h2>Here's what you have so far...</h2>
           <p>{this.state.madlib}</p>
         </form>
