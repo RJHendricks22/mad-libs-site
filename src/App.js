@@ -24,14 +24,9 @@ class App extends Component {
 
   madLibInput(e){
     let inputMsg = e.target.value.split(' ');
-    let splitMsg = "";
-//    inputMsg.forEach(function(msg){
-//      return splitMsg += "<button>"+msg+"</button>";
-//    });
     this.setState({
       madlib: inputMsg
     });
-    console.log(this.state.madlib)
   };
   
   hideNameInput(e){
@@ -50,8 +45,8 @@ class App extends Component {
       nameplate = `Hey ${this.state.name}!`;
     };
     
-    let madLibOutput = this.state.madlib.map( word => 
-        <button>{word}</button>
+    let madLibOutput = this.state.madlib.map( (word,i) => 
+        <button key={i}>{word}</button>
     );
     
     return (
