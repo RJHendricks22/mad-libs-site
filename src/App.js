@@ -7,12 +7,12 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      madlib: "",
+      madlib: [],
       name: "",
       namedisplay: "show"
     };
     this.nameChange = this.nameChange.bind(this);
-    this.madLibChange = this.madLibChange.bind(this);
+    this.madLibInput = this.madLibInput.bind(this);
     this.hideNameInput = this.hideNameInput.bind(this);
   };
 
@@ -22,10 +22,16 @@ class App extends Component {
     });
   };
 
-  madLibChange(e){
+  madLibInput(e){
+    let inputMsg = e.target.value.split(' ');
+    let splitMsg = "";
+//    inputMsg.forEach(function(msg){
+//      return splitMsg += "<button>"+msg+"</button>";
+//    });
     this.setState({
-      madlib: e.target.value
+      madlib: inputMsg
     });
+    console.log(this.state.madlib)
   };
   
   hideNameInput(e){
@@ -34,7 +40,7 @@ class App extends Component {
     });
     e.preventDefault();
   };
-
+  
   render() {
     let nameplate= "";
 
@@ -43,7 +49,11 @@ class App extends Component {
     } else {
       nameplate = `Hey ${this.state.name}!`;
     };
-
+    
+    let madLibOutput = this.state.madlib.map( word => 
+        <button>{word}</button>
+    );
+    
     return (
       <div className="App">
         <h1>{nameplate}</h1>
@@ -54,10 +64,10 @@ class App extends Component {
           </div>
           <br/><br/>
           <h3>Copy and Paste the mad lib</h3>
-          <textarea name="madlibinput" onChange={this.madLibChange}></textarea>
+          <textarea name="madlibinput" onChange={this.madLibInput}></textarea>
           <button onClick={this.renderMadLib}>Render!</button>
           <h2>Here's what you have so far...</h2>
-          <p>{this.state.madlib}</p>
+          {madLibOutput}
         </form>
       </div>
     );
