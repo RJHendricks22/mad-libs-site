@@ -14,6 +14,7 @@ class App extends Component {
     this.nameChange = this.nameChange.bind(this);
     this.madLibInput = this.madLibInput.bind(this);
     this.hideNameInput = this.hideNameInput.bind(this);
+    this.changeWord = this.changeWord.bind(this);
   };
 
   nameChange(e){
@@ -36,6 +37,11 @@ class App extends Component {
     e.preventDefault();
   };
   
+  changeWord(e){
+    e.preventDefault();
+    e.target.innerText = "test"
+  };
+  
   render() {
     let nameplate= "";
 
@@ -46,7 +52,7 @@ class App extends Component {
     };
     
     let madLibOutput = this.state.madlib.map( (word,i) => 
-        <button key={i}>{word}</button>
+        <button key={`word_${i}`} onClick={this.changeWord}>{word}</button>
     );
     
     return (
