@@ -1,3 +1,7 @@
+body {
+  margin: 0;
+}
+
 .App {
   text-align: center;
 }
@@ -26,4 +30,10 @@
 textarea {
   width: 50em;
   height: 20em;
+}
+
+.madlibOutput {
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
 }
