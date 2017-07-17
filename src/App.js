@@ -9,7 +9,8 @@ class App extends Component {
     this.state = {
       madlib: [],
       name: "",
-      namedisplay: "show"
+      namedisplay: "show",
+      madLibOptions: 0
     };
     this.nameChange = this.nameChange.bind(this);
     this.madLibInput = this.madLibInput.bind(this);
@@ -39,21 +40,31 @@ class App extends Component {
   
   wordMenu(e){
     e.preventDefault();
-    e.target.innerText = "test"
-    
+    let madLibOption = [
+      "*Noun", "*Adjective", "*Verb", "*BodyPart", "*PersonInRoom", e.target.innerText
+    ];
+    let i = Number(e.target.value);
+    if (i < madLibOption.length){
+      console.log(e.target.value)
+      e.target.innerText = madLibOption[i];
+      e.target.value = i+1
+    } else if (i >= 6){
+      console.log(e.target.value)
+      e.target.value = this.state.madLibOptions
+    }
   };
   
   render() {
     let nameplate= "";
 
-    if (this.state.name == "") {
+    if (this.state.name === "") {
       nameplate = "Type in your name!";
     } else {
       nameplate = `Hey ${this.state.name}!`;
     };
     
     let madLibOutput = this.state.madlib.map( (word,i) => 
-        <button key={`word_${i}`} onMouseOver={this.wordMenu} >{word}</button>
+        <button key={`word_${i}`} onClick={this.wordMenu} value={this.state.madLibOptions}>{word}</button>
     );
     
     return (
