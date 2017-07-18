@@ -39,8 +39,12 @@ class App extends Component {
   
   renderMadLib(e){
     e.preventDefault();
-    
+    let wordsArray = document.getElementsByClassName('WordRender')
+    for (let x=0;x<wordsArray.length;x++){
+      console.log(wordsArray[x].innerText)
+    }
   }
+  
   render() {
     let nameplate= "";
 
@@ -60,7 +64,7 @@ class App extends Component {
         <h1>{nameplate}</h1>
         <form action="/signup">
           <div id="nameInput" style={{display: this.state.namedisplay}}>
-            <label for="name">What's your name?</label>
+            <label >What's your name?</label>
             <input name="name" type="text" onChange={this.nameChange}/><button onClick={this.hideNameInput}>Accept</button>
           </div>
           <br/><br/>

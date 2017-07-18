@@ -13,7 +13,7 @@ export class WordRender extends Component {
     e.preventDefault();
 
     let madLibOption = [
-      this.props.original, "*Noun", "*Adjective", "*Verb", "*BodyPart", "*PersonInRoom" 
+      this.props.original, "&Noun", "&Adjective", "&Verb", "&BodyPart", "&PersonInRoom" 
     ];
     let i = Number(e.target.value)+1;
     if (i < madLibOption.length){
@@ -29,7 +29,7 @@ export class WordRender extends Component {
 
   render(){
     return(
-      <button onClick={this.wordMenu} value={this.state.madLibOptions} >{this.props.original}</button>
+      <button className="WordRender" onClick={this.wordMenu} value={this.state.madLibOptions} >{this.props.original}</button>
     );
   }
 };
