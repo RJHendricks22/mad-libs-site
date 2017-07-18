@@ -40,17 +40,21 @@ class App extends Component {
   
   wordMenu(e){
     e.preventDefault();
+    
     let madLibOption = [
-      "*Noun", "*Adjective", "*Verb", "*BodyPart", "*PersonInRoom", e.target.innerText
+      e.target.innerText, "*Noun", "*Adjective", "*Verb", "*BodyPart", "*PersonInRoom" 
     ];
-    let i = Number(e.target.value);
+    let i = Number(e.target.value) + 1;
     if (i < madLibOption.length){
       console.log(e.target.value)
+      console.log(e.target.original)
       e.target.innerText = madLibOption[i];
-      e.target.value = i+1
+      e.target.value = i;
     } else if (i >= 6){
       console.log(e.target.value)
       e.target.value = this.state.madLibOptions
+    } else {
+      alert("Uh oh")
     }
   };
   
