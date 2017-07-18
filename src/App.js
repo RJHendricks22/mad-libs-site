@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {WordRender} from './WordRender';
 import logo from './logo.svg';
 import './App.css';
 
@@ -9,13 +10,11 @@ class App extends Component {
     this.state = {
       madlib: [],
       name: "",
-      namedisplay: "show",
-      madLibOptions: 0
+      namedisplay: "show"
     };
     this.nameChange = this.nameChange.bind(this);
     this.madLibInput = this.madLibInput.bind(this);
     this.hideNameInput = this.hideNameInput.bind(this);
-    this.wordMenu = this.wordMenu.bind(this);
   };
 
   nameChange(e){
@@ -38,26 +37,10 @@ class App extends Component {
     e.preventDefault();
   };
   
-  wordMenu(e){
+  renderMadLib(e){
     e.preventDefault();
     
-    let madLibOption = [
-      e.target.innerText, "*Noun", "*Adjective", "*Verb", "*BodyPart", "*PersonInRoom" 
-    ];
-    let i = Number(e.target.value) + 1;
-    if (i < madLibOption.length){
-      console.log(e.target.value)
-      console.log(e.target.original)
-      e.target.innerText = madLibOption[i];
-      e.target.value = i;
-    } else if (i >= 6){
-      console.log(e.target.value)
-      e.target.value = this.state.madLibOptions
-    } else {
-      alert("Uh oh")
-    }
-  };
-  
+  }
   render() {
     let nameplate= "";
 
@@ -67,8 +50,9 @@ class App extends Component {
       nameplate = `Hey ${this.state.name}!`;
     };
     
+    let original = {word: ""};
     let madLibOutput = this.state.madlib.map( (word,i) => 
-        <button key={`word_${i}`} onClick={this.wordMenu} value={this.state.madLibOptions}>{word}</button>
+        <WordRender key={`word_${i}`} original={word}/>
     );
     
     return (
