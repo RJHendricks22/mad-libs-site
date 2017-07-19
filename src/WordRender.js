@@ -13,7 +13,7 @@ export class WordRender extends Component {
     e.preventDefault();
 
     let madLibOption = [
-      this.props.original, "&Noun", "&Adjective", "&Verb", "&BodyPart", "&PersonInRoom" 
+      this.props.original, "_Noun_", "_Adjective_", "_Verb_", "_BodyPart_", "_PersonInRoom_" 
     ];
     let i = Number(e.target.value)+1;
     if (i < madLibOption.length){

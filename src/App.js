@@ -37,13 +37,19 @@ class App extends Component {
     e.preventDefault();
   };
   
+  
+  
   renderMadLib(e){
     e.preventDefault();
-    let wordsArray = document.getElementsByClassName('WordRender')
+    let wordsArray = document.getElementsByClassName('WordRender');
+    let adjectives = [];
     for (let x=0;x<wordsArray.length;x++){
-      console.log(wordsArray[x].innerText)
-    }
-  }
+      if (wordsArray[x].value != 0){
+        adjectives.push(wordsArray[x])
+      }
+    };
+//    renderInputFields(adjectives)
+  } 
   
   render() {
     let nameplate= "";
@@ -55,6 +61,12 @@ class App extends Component {
     };
     
     let original = {word: ""};
+    
+    let renderInputFields = function(inputArray){ 
+      inputArray.map((inputField,i) => 
+        <p key={i} >inputField</p>              
+      )
+    }
     let madLibOutput = this.state.madlib.map( (word,i) => 
         <WordRender key={`word_${i}`} original={word}/>
     );
