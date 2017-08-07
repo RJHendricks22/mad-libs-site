@@ -9,7 +9,7 @@ export class MadLibGenerate extends Component {
   
   
   render(){
-    console.log(this.props.story)
+    console.log(this.state)
 //    let storyText;
 //    if (this.props.story != ""){
 //      let storyText = this.props.story.map(function(obje,i) {

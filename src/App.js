@@ -11,7 +11,8 @@ class App extends Component {
     this.state = {
       madlib: [],
       name: "",
-      namedisplay: "show"
+      namedisplay: "show",
+      madLibInputs: []
     };
     this.nameChange = this.nameChange.bind(this);
     this.madLibInput = this.madLibInput.bind(this);
@@ -43,16 +44,15 @@ class App extends Component {
   
   renderMadLib(e){
     e.preventDefault();
-    let wordsArray = document.getElementsByClassName('WordRender');
-    console.log( wordsArray )
-    return wordsArray
-//    let changedWords = [];
-//    for (let x=0;x<wordsArray.length;x++){
-//      if (wordsArray[x].value != 0){
-//        changedWords.push(wordsArray[x])
-//      }
-//    };
-//    renderInputFields(adjectives)
+    this.state.madLibInputs = document.getElementsByClassName('WordRender');
+    let changedWords = [];
+    for (let x=0;x<this.state.madLibInputs.length;x++){
+      if (this.state.madLibInputs[x].value != 0){
+        changedWords.push(this.state.madLibInputs[x])
+      }
+    };
+    console.log(changedWords)
+    console.log(this.state.madLibInputs)
   } 
   
   render() {
@@ -67,17 +67,10 @@ class App extends Component {
     let original = {word: ""};
     
     let madLibStory = {story: [""]};
-    
-    let renderInputFields = function(inputArray){ 
-      inputArray.map((inputField,i) => 
-        <p key={i} >inputField</p>              
-      )
-    };
 
     let madLibOutput = this.state.madlib.map( (word,i) => 
         <WordRender key={`word_${i}`} original={word}/>
     );
-    
     return (
       <div className="App">
         <h1>{nameplate}</h1>
@@ -88,8 +81,8 @@ class App extends Component {
           </div>
           <br/><br/>
           <h2>The madlib will appear here</h2>
-          <MadLibGenerate madLibStory={JSON.stringify(this.wordsArray)} />
-          <p>{this.wordsArray}</p>
+          <MadLibGenerate  />
+          <p>{this.state.madLibInputs}</p>
           <br/><br/>
           <h3>Copy and Paste the mad lib</h3>
           <textarea name="madlibinput" onChange={this.madLibInput}></textarea>
