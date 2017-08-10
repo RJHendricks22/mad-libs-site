@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {WordRender} from './WordRender';
-import {MadLibGenerate} from './MadLibGenerate';
+//import {MadLibGenerate} from './MadLibGenerate';
 import logo from './logo.svg';
 import './App.css';
 
@@ -12,12 +12,14 @@ class App extends Component {
       madlib: [],
       name: "",
       namedisplay: "show",
-      madLibInputs: []
+      madLibInputs: [],
+      wordsToChange: {}
     };
     this.nameChange = this.nameChange.bind(this);
     this.madLibInput = this.madLibInput.bind(this);
     this.hideNameInput = this.hideNameInput.bind(this);
     this.renderMadLib = this.renderMadLib.bind(this);
+    this.renderInputBoxes = this.renderInputBoxes.bind(this);
   };
 
   nameChange(e){
@@ -40,20 +42,36 @@ class App extends Component {
     e.preventDefault();
   };
   
-  
+  renderInputBoxes(obj){
+    if (Object.keys(obj).length > 0){
+      let wrapper = document.getElementById('InputBoxes');
+      while (wrapper.firstChild) {
+        wrapper.removeChild(wrapper.firstChild);
+      }
+      for (let x=0;x<Object.keys(obj).length;x++){
+        let inputBox = document.createElement("input")
+        wrapper.appendChild(inputBox)
+      }
+      let makeButton = document.createElement("button")
+      wrapper.appendChild(makeButton)
+    }
+  }
   
   renderMadLib(e){
     e.preventDefault();
     this.state.madLibInputs = document.getElementsByClassName('WordRender');
-    let changedWords = [];
     for (let x=0;x<this.state.madLibInputs.length;x++){
       if (this.state.madLibInputs[x].value != 0){
-        changedWords.push(this.state.madLibInputs[x])
+        this.state.wordsToChange[x] = this.state.madLibInputs[x]
       }
     };
-    console.log(changedWords)
-    console.log(this.state.madLibInputs)
-  } 
+    document.getElementById('step1button').setAttribute("style","display:none;")
+    this.renderInputBoxes(this.state.wordsToChange)
+//    console.log(this.state.madLibInputs)
+//    console.log(this.state.wordsToChange)
+  }
+  
+  
   
   render() {
     let nameplate= "";
@@ -81,13 +99,12 @@ class App extends Component {
           </div>
           <br/><br/>
           <h2>The madlib will appear here</h2>
-          <MadLibGenerate  />
-          <p>{this.state.madLibInputs}</p>
+          <div id="InputBoxes"></div>
           <br/><br/>
           <h3>Copy and Paste the mad lib</h3>
           <textarea name="madlibinput" onChange={this.madLibInput}></textarea>
           <br />
-          <button onClick={this.renderMadLib}>Render!</button>
+          <button onClick={this.renderMadLib} id="step1button">Render!</button>
           <h2>Here's what you have so far...</h2>
           <div className="madlibOutput">{madLibOutput}</div>
         </form>
